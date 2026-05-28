@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import EmailForm from '@/components/EmailForm';
 
 export default function Home() {
@@ -26,9 +27,14 @@ export default function Home() {
         </div>
 
         {/* Wordmark */}
-        <h1 className="font-display font-black text-[clamp(3.5rem,16vw,8rem)] leading-none tracking-tight text-white animate-fade-up delay-100">
-          YERBY
-        </h1>
+        <Image
+          src="/logo-wordmark.png"
+          alt="Yerby"
+          width={1080}
+          height={1080}
+          priority
+          className="w-[85vw] max-w-[460px] h-auto invert mix-blend-screen animate-fade-up delay-100"
+        />
 
         {/* Separator */}
         <div className="w-14 h-px bg-brand-yellow/40 mt-8 mb-7 animate-fade-up delay-200" />
