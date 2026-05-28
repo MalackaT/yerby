@@ -30,11 +30,16 @@ const config: Config = {
       },
       animation: {
         'fade-up': 'fadeUp 0.9s ease-out both',
+        'float': 'float 6s ease-in-out infinite',
       },
       keyframes: {
         fadeUp: {
           from: { opacity: '0', transform: 'translateY(14px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px) rotate(-2deg)' },
+          '50%': { transform: 'translateY(-40px) rotate(2deg)' },
         },
       },
     },

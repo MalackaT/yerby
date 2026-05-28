@@ -95,7 +95,7 @@ export default function EmailForm({ dark = false }: { dark?: boolean }) {
             'transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed',
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
             dark
-              ? 'bg-white text-brand-green-dark hover:bg-white/90 focus-visible:ring-white focus-visible:ring-offset-brand-green-dark'
+              ? 'bg-brand-yellow text-brand-green-dark hover:bg-brand-yellow-light focus-visible:ring-brand-yellow focus-visible:ring-offset-brand-green-dark'
               : 'bg-brand-green text-white hover:bg-brand-green-dark focus-visible:ring-brand-green focus-visible:ring-offset-brand-cream',
           ].join(' ')}
         >
