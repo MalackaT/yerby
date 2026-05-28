@@ -6,11 +6,11 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
 
       {/* ─────────────────────────────────────────────
-          TOP ZONE — krémová
+          TOP ZONE — žlutá značka, logo v centru
       ───────────────────────────────────────────── */}
-      <section className="flex-1 min-h-[42vh] flex flex-col items-center justify-center px-4 py-10 bg-brand-cream">
+      <section className="flex-1 min-h-[42vh] flex flex-col items-center justify-center px-4 py-10 bg-brand-yellow">
 
-        {/* Slovní značka */}
+        {/* Slovní značka — na žlutém pozadí, mix-blend-multiply odstraní bílou */}
         <Image
           src="/logo-wordmark.png"
           alt="Yerby"
@@ -20,10 +20,10 @@ export default function Home() {
           className="w-[96vw] max-w-[680px] h-auto mix-blend-multiply animate-fade-up delay-0"
         />
 
-        {/* Již brzy — pod logem, výrazně */}
-        <div className="mt-5 inline-flex items-center gap-2.5 border border-brand-border rounded-full px-5 py-2 animate-fade-up delay-150">
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-green shrink-0" />
-          <span className="font-sans text-xs font-medium tracking-[0.28em] uppercase text-brand-mid">
+        {/* Již brzy — pod logem */}
+        <div className="mt-5 inline-flex items-center gap-2.5 border border-brand-green-dark/20 rounded-full px-5 py-2 bg-brand-green-dark/8 animate-fade-up delay-150">
+          <span className="w-1.5 h-1.5 rounded-full bg-brand-green-dark shrink-0" />
+          <span className="font-sans text-xs font-semibold tracking-[0.28em] uppercase text-brand-green-dark">
             Již brzy
           </span>
         </div>

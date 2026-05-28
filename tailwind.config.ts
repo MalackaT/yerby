@@ -13,8 +13,11 @@ const config: Config = {
       },
       colors: {
         brand: {
+          yellow: '#F3C635',      // primary brand yellow (from screenshot)
+          'yellow-light': '#F7D860', // lighter yellow for hover/accents
           cream: '#F4F1EB',
           ink: '#0F0F0E',
+          dark: '#1A1A18',        // near-black from dark sections
           mid: '#7A7A6E',
           muted: '#A4A498',
           faint: '#C4C0B6',
