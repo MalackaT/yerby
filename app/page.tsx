@@ -1,91 +1,83 @@
 import Image from 'next/image';
 import EmailForm from '@/components/EmailForm';
 
-// Kept as inline SVG for the tiny decorative instances (separator, footer)
-// where a PNG would be too blurry at ~12px.
-function YIconMark({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 88 118"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      className={className}
-    >
-      <path d="M 42 7 C 36 3 26 5 20 13 C 14 21 16 33 22 43 C 27 51 35 57 37 67 C 39 75 35 85 31 97 C 27 107 27 117 37 119 C 47 121 55 113 59 103 C 63 93 63 81 67 69 C 71 59 77 51 77 39 C 77 29 73 17 65 11 C 57 5 49 9 47 17 C 45 23 45 33 41 39 C 37 45 29 45 25 37 C 21 29 23 15 31 9 C 35 6 39 9 42 7 Z" />
-      <path d="M 63 5 C 69 1 79 5 79 15 C 79 25 73 37 63 37 C 57 37 53 29 55 21 C 57 13 59 8 63 5 Z" />
-    </svg>
-  );
-}
-
 export default function Home() {
   return (
-    <main className="min-h-screen bg-brand-bg flex flex-col">
+    <div className="min-h-screen flex flex-col">
 
-      {/* ── Hero ── */}
-      <section className="flex-1 flex flex-col items-center justify-center px-6 py-16 text-center">
+      {/* ────────────────────────────────────────
+          TOP ZONE — cream, logo-focused
+      ──────────────────────────────────────── */}
+      <section className="flex-1 flex flex-col items-center justify-center gap-6 px-6 py-16 bg-brand-cream">
 
-        {/* Logo zone */}
-        <div className="mb-10 animate-fade-up delay-100">
+        {/* "Coming soon" label */}
+        <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-brand-muted animate-fade-up delay-0">
+          Coming Soon
+        </p>
 
-          {/* Icon mark — real PNG */}
-          <Image
-            src="/logo-icon.png"
-            alt=""
-            width={1080}
-            height={1080}
-            priority
-            className="w-20 h-20 mx-auto mb-6 mix-blend-multiply"
-          />
+        {/* Icon mark */}
+        <Image
+          src="/logo-icon.png"
+          alt=""
+          width={1080}
+          height={1080}
+          priority
+          className="w-16 h-16 mix-blend-multiply animate-fade-up delay-100"
+        />
 
-          {/* Wordmark — real PNG */}
-          <Image
-            src="/logo-wordmark.png"
-            alt="Yerby"
-            width={1080}
-            height={1080}
-            priority
-            className="w-52 sm:w-64 h-auto mx-auto mix-blend-multiply"
-          />
+        {/* Wordmark — hero element */}
+        <Image
+          src="/logo-wordmark.png"
+          alt="Yerby"
+          width={1080}
+          height={1080}
+          priority
+          className="w-full max-w-[340px] sm:max-w-[460px] h-auto mix-blend-multiply animate-fade-up delay-200"
+        />
+
+      </section>
+
+      {/* ────────────────────────────────────────
+          BOTTOM ZONE — deep green, copy + form
+      ──────────────────────────────────────── */}
+      <section className="bg-brand-green-dark px-6 pt-12 pb-10 flex flex-col items-center text-center">
+
+        {/* Top rule with dot */}
+        <div className="flex items-center gap-3 w-full max-w-md mb-10 animate-fade-up delay-300">
+          <div className="flex-1 h-px bg-white/10" />
+          <div className="w-2 h-2 rounded-full bg-brand-green-pale" />
+          <div className="flex-1 h-px bg-white/10" />
         </div>
 
-        {/* Separator */}
-        <div className="flex items-center gap-3 mb-10 animate-fade-up delay-200">
-          <div className="w-10 h-px bg-brand-border" />
-          <YIconMark className="w-3 h-auto text-brand-green" />
-          <div className="w-10 h-px bg-brand-border" />
-        </div>
-
-        {/* Taglines */}
-        <div className="mb-12 space-y-3 animate-fade-up delay-350">
-          <p className="font-display font-bold text-brand-ink text-xl sm:text-2xl leading-snug max-w-xs sm:max-w-sm">
-            The new ritual for the conscious mover.
+        {/* Headline */}
+        <div className="max-w-sm mb-3 animate-fade-up delay-400">
+          <p className="font-display font-bold text-white text-xl sm:text-2xl leading-snug">
+            The ritual for the active and intentional.
           </p>
-          <p className="font-sans font-light text-brand-mid text-sm tracking-wide">
-            Pure focus.&ensp;Natural energy.&ensp;Zero compromise.
-          </p>
         </div>
 
-        {/* Email form */}
+        {/* Sub-copy */}
+        <p className="font-sans text-sm text-white/40 tracking-wide mb-10 animate-fade-up delay-400">
+          Pure focus.&ensp;Natural energy.&ensp;Zero compromise.
+        </p>
+
+        {/* Email form — dark variant */}
         <div className="w-full max-w-md animate-fade-up delay-500">
-          <EmailForm />
+          <EmailForm dark />
         </div>
 
         {/* Privacy note */}
-        <p className="mt-6 font-sans text-[11px] tracking-[0.18em] uppercase text-brand-faint animate-fade-up delay-650">
+        <p className="mt-5 font-sans text-[10px] tracking-[0.22em] uppercase text-white/20 animate-fade-up delay-600">
           No spam &mdash; just the launch.
+        </p>
+
+        {/* Footer */}
+        <p className="mt-10 font-sans text-[10px] tracking-[0.22em] uppercase text-white/15 animate-fade-up delay-700">
+          &copy; {new Date().getFullYear()} Yerby. All rights reserved.
         </p>
 
       </section>
 
-      {/* ── Footer ── */}
-      <footer className="py-8 flex items-center justify-center gap-2.5 animate-fade-up delay-800">
-        <YIconMark className="w-3 h-auto text-brand-faint" />
-        <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-brand-faint">
-          &copy; {new Date().getFullYear()} Yerby. All rights reserved.
-        </p>
-      </footer>
-
-    </main>
+    </div>
   );
 }

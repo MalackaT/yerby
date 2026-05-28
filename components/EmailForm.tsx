@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-export default function EmailForm() {
+export default function EmailForm({ dark = false }: { dark?: boolean }) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [message, setMessage] = useState('');
@@ -43,10 +43,15 @@ export default function EmailForm() {
 
   if (status === 'success') {
     return (
-      <div className="animate-fade-up text-center py-4">
-        <div className="inline-flex items-center gap-3 bg-white border border-brand-border rounded-full px-6 py-3 shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-brand-green shrink-0" />
-          <span className="font-sans text-sm text-brand-green font-medium tracking-wide">
+      <div className="animate-fade-up py-3 text-center">
+        <div className={[
+          'inline-flex items-center gap-3 rounded-full px-6 py-3',
+          dark
+            ? 'border border-white/20 bg-white/5'
+            : 'bg-white border border-brand-border shadow-sm',
+        ].join(' ')}>
+          <span className={`w-2 h-2 rounded-full shrink-0 ${dark ? 'bg-brand-green-pale' : 'bg-brand-green'}`} />
+          <span className={`font-sans text-sm font-medium tracking-wide ${dark ? 'text-white' : 'text-brand-green'}`}>
             {message}
           </span>
         </div>
@@ -57,6 +62,7 @@ export default function EmailForm() {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div className="flex flex-col sm:flex-row gap-2.5">
+
         <input
           ref={inputRef}
           type="email"
@@ -70,37 +76,51 @@ export default function EmailForm() {
           required
           autoComplete="email"
           spellCheck={false}
-          className={[
-            'flex-1 bg-white border border-brand-border rounded-full',
-            'px-5 py-3 outline-none',
-            'font-sans text-sm text-brand-ink placeholder:text-brand-faint',
-            'transition-colors duration-200',
-            'focus:border-brand-green focus:ring-2 focus:ring-brand-green/10',
-            'disabled:opacity-50',
-          ].join(' ')}
           aria-label="Email address"
+          className={[
+            'flex-1 rounded-full px-5 py-3 outline-none font-sans text-sm',
+            'transition-colors duration-200 disabled:opacity-50',
+            dark
+              ? [
+                  'bg-white/5 border border-white/20 text-white placeholder:text-white/30',
+                  'focus:border-white/50 focus:ring-2 focus:ring-white/10',
+                ].join(' ')
+              : [
+                  'bg-white border border-brand-border text-brand-ink placeholder:text-brand-faint',
+                  'focus:border-brand-green focus:ring-2 focus:ring-brand-green/10',
+                ].join(' '),
+          ].join(' ')}
         />
 
         <button
           type="submit"
           disabled={status === 'loading'}
           className={[
-            'shrink-0 rounded-full',
-            'px-7 py-3 bg-brand-green text-white',
+            'shrink-0 rounded-full px-7 py-3',
             'font-display font-bold text-sm tracking-wide',
-            'hover:bg-brand-green-dark transition-colors duration-200',
-            'disabled:opacity-60 disabled:cursor-not-allowed',
-            'focus-visible:outline-none focus-visible:ring-2',
-            'focus-visible:ring-brand-green focus-visible:ring-offset-2',
-            'focus-visible:ring-offset-brand-bg',
+            'transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+            dark
+              ? [
+                  'bg-white text-brand-green-dark hover:bg-white/90',
+                  'focus-visible:ring-white focus-visible:ring-offset-brand-green-dark',
+                ].join(' ')
+              : [
+                  'bg-brand-green text-white hover:bg-brand-green-dark',
+                  'focus-visible:ring-brand-green focus-visible:ring-offset-brand-cream',
+                ].join(' '),
           ].join(' ')}
         >
-          {status === 'loading' ? <LoadingDots /> : 'Notify Me'}
+          {status === 'loading' ? <LoadingDots dark={dark} /> : 'Notify Me'}
         </button>
+
       </div>
 
       {status === 'error' && (
-        <p className="mt-3 text-center font-sans text-xs text-red-500 tracking-wide animate-fade-up">
+        <p className={[
+          'mt-3 text-center font-sans text-xs tracking-wide animate-fade-up',
+          dark ? 'text-red-300' : 'text-red-500',
+        ].join(' ')}>
           {message}
         </p>
       )}
@@ -108,13 +128,15 @@ export default function EmailForm() {
   );
 }
 
-function LoadingDots() {
+function LoadingDots({ dark }: { dark: boolean }) {
   return (
     <span className="inline-flex gap-1 items-center h-5">
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="block w-1.5 h-1.5 rounded-full bg-white animate-bounce"
+          className={`block w-1.5 h-1.5 rounded-full animate-bounce ${
+            dark ? 'bg-brand-green-dark' : 'bg-white'
+          }`}
           style={{ animationDelay: `${i * 150}ms`, animationDuration: '0.8s' }}
         />
       ))}

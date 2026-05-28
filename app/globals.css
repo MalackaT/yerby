@@ -4,30 +4,28 @@
 
 @layer base {
   * { box-sizing: border-box; }
-
   html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
   body {
-    background-color: #F7F5EF;
-    color: #0F0F0E;
     font-family: var(--font-dm-sans), system-ui, sans-serif;
   }
 }
 
 @layer utilities {
+  .delay-0   { animation-delay: 0ms; }
   .delay-100 { animation-delay: 100ms; }
   .delay-200 { animation-delay: 200ms; }
-  .delay-350 { animation-delay: 350ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
   .delay-500 { animation-delay: 500ms; }
-  .delay-650 { animation-delay: 650ms; }
-  .delay-800 { animation-delay: 800ms; }
+  .delay-600 { animation-delay: 600ms; }
+  .delay-700 { animation-delay: 700ms; }
 }
 
-/* Autofill override */
+/* Dark zone autofill */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #F7F5EF inset;
-  -webkit-text-fill-color: #0F0F0E;
+  -webkit-box-shadow: 0 0 0 1000px #1C3D2A inset;
+  -webkit-text-fill-color: #ffffff;
   transition: background-color 5000s ease-in-out 0s;
 }

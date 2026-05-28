@@ -13,22 +13,24 @@ const config: Config = {
       },
       colors: {
         brand: {
-          bg: '#F7F5EF',
+          cream: '#F4F1EB',
           ink: '#0F0F0E',
-          mid: '#6A6A5E',
+          mid: '#7A7A6E',
           muted: '#A4A498',
           faint: '#C4C0B6',
-          green: '#2A7A4A',
-          'green-dark': '#1D5C36',
           border: '#D8D4CA',
+          green: '#2A7A4A',
+          'green-dark': '#1C3D2A',
+          'green-mid': '#4A9A6A',
+          'green-pale': '#6DAF8A',
         },
       },
       animation: {
-        'fade-up': 'fadeUp 0.8s ease-out both',
+        'fade-up': 'fadeUp 0.9s ease-out both',
       },
       keyframes: {
         fadeUp: {
-          from: { opacity: '0', transform: 'translateY(12px)' },
+          from: { opacity: '0', transform: 'translateY(14px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
       },
