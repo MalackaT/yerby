@@ -1,30 +1,22 @@
-import Database from 'better-sqlite3';
-import path from 'path';
 import fs from 'fs';
+import path from 'path';
 
-let _db: Database.Database | null = null;
+const DATA_DIR = path.join(process.cwd(), 'data');
+const CSV_PATH = path.join(DATA_DIR, 'emails.csv');
 
-function getDb(): Database.Database {
-  if (_db) return _db;
-
-  const dataDir = path.join(process.cwd(), 'data');
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
+function ensureFile() {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
   }
+  if (!fs.existsSync(CSV_PATH)) {
+    fs.writeFileSync(CSV_PATH, 'email,joined_at\n', 'utf8');
+  }
+}
 
-  _db = new Database(path.join(dataDir, 'emails.db'));
-
-  _db.pragma('journal_mode = WAL');
-
-  _db.exec(`
-    CREATE TABLE IF NOT EXISTS subscribers (
-      id         INTEGER PRIMARY KEY AUTOINCREMENT,
-      email      TEXT    UNIQUE NOT NULL COLLATE NOCASE,
-      created_at TEXT    NOT NULL DEFAULT (datetime('now'))
-    )
-  `);
-
-  return _db;
+function emailExists(email: string): boolean {
+  if (!fs.existsSync(CSV_PATH)) return false;
+  const lines = fs.readFileSync(CSV_PATH, 'utf8').split('\n').slice(1);
+  return lines.some((line) => line.split(',')[0]?.toLowerCase() === email);
 }
 
 export type SubscribeResult =
@@ -33,14 +25,12 @@ export type SubscribeResult =
   | { success: false; error: string };
 
 export function addSubscriber(email: string): SubscribeResult {
-  try {
-    getDb().prepare('INSERT INTO subscribers (email) VALUES (?)').run(email);
-    return { success: true, alreadyExists: false };
-  } catch (err: unknown) {
-    const sqliteErr = err as { code?: string };
-    if (sqliteErr.code === 'SQLITE_CONSTRAINT_UNIQUE') {
-      return { success: true, alreadyExists: true };
-    }
-    throw err;
+  ensureFile();
+
+  if (emailExists(email)) {
+    return { success: true, alreadyExists: true };
   }
+
+  fs.appendFileSync(CSV_PATH, `${email},${new Date().toISOString()}\n`, 'utf8');
+  return { success: true, alreadyExists: false };
 }

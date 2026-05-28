@@ -7,8 +7,8 @@ build/
 node_modules/
 
 # Data (contains user emails — never commit)
-data/*.db
 data/*.csv
+data/*.db
 
 # Environment
 .env
