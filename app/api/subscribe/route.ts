@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addSubscriber } from '@/lib/db';
+import { addSubscriber } from '@/lib/resend';
+
+export const dynamic = 'force-dynamic';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -27,7 +29,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const result = addSubscriber(normalized);
+    const result = await addSubscriber(normalized);
 
     if (!result.success) {
       return NextResponse.json({ error: result.error }, { status: 500 });
@@ -35,12 +37,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: result.alreadyExists
-        ? "You're already on the list. Stay tuned."
-        : "You're on the list. Stay tuned.",
+      message: "You're on the list. Stay tuned.",
     });
   } catch (err) {
-    console.error('[subscribe] DB error:', err);
+    console.error('[subscribe] error:', err);
     return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
   }
 }

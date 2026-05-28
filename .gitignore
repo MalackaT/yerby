@@ -10,7 +10,7 @@ node_modules/
 data/*.csv
 data/*.db
 
-# Environment
+# Environment — never commit secrets
 .env
 .env*.local
 
