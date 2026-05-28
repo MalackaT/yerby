@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
+    return NextResponse.json({ error: 'Neplatný požadavek.' }, { status: 400 });
   }
 
   const email =
@@ -19,13 +19,13 @@ export async function POST(req: NextRequest) {
       : undefined;
 
   if (!email || typeof email !== 'string' || !email.trim()) {
-    return NextResponse.json({ error: 'Email is required.' }, { status: 400 });
+    return NextResponse.json({ error: 'E-mail je povinný.' }, { status: 400 });
   }
 
   const normalized = email.trim().toLowerCase();
 
   if (!EMAIL_RE.test(normalized)) {
-    return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 422 });
+    return NextResponse.json({ error: 'Zadejte platnou e-mailovou adresu.' }, { status: 422 });
   }
 
   try {
@@ -37,10 +37,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: "You're on the list. Stay tuned.",
+      message: 'Jsi na seznamu. Sleduj nás!',
     });
   } catch (err) {
     console.error('[subscribe] error:', err);
-    return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
+    return NextResponse.json({ error: 'Něco se pokazilo. Zkuste to prosím znovu.' }, { status: 500 });
   }
 }

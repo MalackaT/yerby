@@ -4,37 +4,37 @@ import './globals.css';
 
 const nunito = Nunito({
   weight: ['400', '600', '700', '800', '900'],
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-nunito',
   display: 'swap',
 });
 
 const dmSans = DM_Sans({
   weight: ['300', '400', '500'],
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-dm-sans',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Yerby — Something pure is coming.',
+  title: 'Yerby — Již brzy.',
   description:
-    'Clean energy for the conscious mover. Pure focus, naturally refined. Coming soon.',
+    'Rituál pro aktivní a uvědomělé. Čistý fokus, přírodní energie. Již brzy.',
   openGraph: {
-    title: 'Yerby — Something pure is coming.',
-    description: 'Clean energy for the conscious mover. Pure focus, naturally refined.',
+    title: 'Yerby — Již brzy.',
+    description: 'Rituál pro aktivní a uvědomělé. Čistý fokus, přírodní energie.',
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'Yerby — Something pure is coming.',
-    description: 'Clean energy for the conscious mover. Pure focus, naturally refined.',
+    title: 'Yerby — Již brzy.',
+    description: 'Rituál pro aktivní a uvědomělé. Čistý fokus, přírodní energie.',
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${nunito.variable} ${dmSans.variable}`}>
+    <html lang="cs" className={`${nunito.variable} ${dmSans.variable}`}>
       <body>{children}</body>
     </html>
   );

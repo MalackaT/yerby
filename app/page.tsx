@@ -6,74 +6,72 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
 
       {/* ────────────────────────────────────────
-          TOP ZONE — cream, logo-focused
+          TOP ZONE — krémová, logo v centru
       ──────────────────────────────────────── */}
-      <section className="flex-1 flex flex-col items-center justify-center gap-6 px-6 py-16 bg-brand-cream">
+      <section className="flex-1 min-h-[55vh] flex flex-col items-center justify-center gap-5 px-4 sm:px-6 py-14 sm:py-20 bg-brand-cream">
 
-        {/* "Coming soon" label */}
+        {/* Štítek */}
         <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-brand-muted animate-fade-up delay-0">
-          Coming Soon
+          Již brzy
         </p>
 
-        {/* Icon mark */}
+        {/* Ikonka */}
         <Image
           src="/logo-icon.png"
           alt=""
           width={1080}
           height={1080}
           priority
-          className="w-16 h-16 mix-blend-multiply animate-fade-up delay-100"
+          className="w-20 h-20 sm:w-24 sm:h-24 mix-blend-multiply animate-fade-up delay-100"
         />
 
-        {/* Wordmark — hero element */}
+        {/* Slovní značka — hlavní prvek stránky */}
         <Image
           src="/logo-wordmark.png"
           alt="Yerby"
           width={1080}
           height={1080}
           priority
-          className="w-full max-w-[340px] sm:max-w-[460px] h-auto mix-blend-multiply animate-fade-up delay-200"
+          className="w-[80vw] max-w-[320px] sm:max-w-[460px] h-auto mix-blend-multiply animate-fade-up delay-200"
         />
 
       </section>
 
       {/* ────────────────────────────────────────
-          BOTTOM ZONE — deep green, copy + form
+          DOLNÍ ZÓNA — tmavě zelená, text + formulář
       ──────────────────────────────────────── */}
-      <section className="bg-brand-green-dark px-6 pt-12 pb-10 flex flex-col items-center text-center">
+      <section className="bg-brand-green-dark px-4 sm:px-6 pt-10 pb-10 flex flex-col items-center text-center">
 
-        {/* Top rule with dot */}
-        <div className="flex items-center gap-3 w-full max-w-md mb-10 animate-fade-up delay-300">
+        {/* Oddělovač */}
+        <div className="flex items-center gap-3 w-full max-w-md mb-8 animate-fade-up delay-300">
           <div className="flex-1 h-px bg-white/10" />
           <div className="w-2 h-2 rounded-full bg-brand-green-pale" />
           <div className="flex-1 h-px bg-white/10" />
         </div>
 
-        {/* Headline */}
-        <div className="max-w-sm mb-3 animate-fade-up delay-400">
-          <p className="font-display font-bold text-white text-xl sm:text-2xl leading-snug">
-            The ritual for the active and intentional.
-          </p>
-        </div>
-
-        {/* Sub-copy */}
-        <p className="font-sans text-sm text-white/40 tracking-wide mb-10 animate-fade-up delay-400">
-          Pure focus.&ensp;Natural energy.&ensp;Zero compromise.
+        {/* Nadpis */}
+        <p className="font-display font-bold text-white text-xl sm:text-2xl leading-snug max-w-sm mb-2.5 animate-fade-up delay-400">
+          Rituál pro aktivní a uvědomělé.
         </p>
 
-        {/* Email form — dark variant */}
+        {/* Podnadpis */}
+        <p className="font-sans text-sm text-white/40 tracking-wide mb-8 animate-fade-up delay-400">
+          Čistý fokus.&ensp;Přírodní energie.&ensp;Bez kompromisů.
+        </p>
+
+        {/* Formulář */}
         <div className="w-full max-w-md animate-fade-up delay-500">
           <EmailForm dark />
         </div>
 
-        {/* Privacy note */}
+        {/* Poznámka */}
         <p className="mt-5 font-sans text-[10px] tracking-[0.22em] uppercase text-white/20 animate-fade-up delay-600">
-          No spam &mdash; just the launch.
+          Žádný spam &mdash; jen info o spuštění.
         </p>
 
-        {/* Footer */}
+        {/* Patička */}
         <p className="mt-10 font-sans text-[10px] tracking-[0.22em] uppercase text-white/15 animate-fade-up delay-700">
-          &copy; {new Date().getFullYear()} Yerby. All rights reserved.
+          &copy; {new Date().getFullYear()} Yerby. Všechna práva vyhrazena.
         </p>
 
       </section>
