@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import EmailForm from '@/components/EmailForm';
 
+// Kept as inline SVG for the tiny decorative instances (separator, footer)
+// where a PNG would be too blurry at ~12px.
 function YIconMark({ className }: { className?: string }) {
   return (
     <svg
@@ -26,29 +28,25 @@ export default function Home() {
         {/* Logo zone */}
         <div className="mb-10 animate-fade-up delay-100">
 
-          {/* Icon mark */}
-          <YIconMark className="w-12 h-auto text-brand-ink mx-auto mb-7" />
+          {/* Icon mark — real PNG */}
+          <Image
+            src="/logo-icon.png"
+            alt=""
+            width={1080}
+            height={1080}
+            priority
+            className="w-20 h-20 mx-auto mb-6 mix-blend-multiply"
+          />
 
-          {/*
-            Wordmark — once you have the real PNG/SVG file:
-            1. Copy it to public/logo-wordmark.png (or .svg)
-            2. Uncomment the <Image> block below and remove the <h1> fallback.
-
-            <Image
-              src="/logo-wordmark.png"
-              alt="Yerby"
-              width={220}
-              height={60}
-              priority
-              className="mx-auto"
-            />
-          */}
-          <h1
-            className="font-display font-black text-brand-ink leading-none select-none"
-            style={{ fontSize: 'clamp(3.5rem, 10vw, 6rem)', letterSpacing: '-0.01em' }}
-          >
-            yerby
-          </h1>
+          {/* Wordmark — real PNG */}
+          <Image
+            src="/logo-wordmark.png"
+            alt="Yerby"
+            width={1080}
+            height={1080}
+            priority
+            className="w-52 sm:w-64 h-auto mx-auto mix-blend-multiply"
+          />
         </div>
 
         {/* Separator */}
