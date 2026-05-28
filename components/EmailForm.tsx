@@ -43,17 +43,20 @@ export default function EmailForm() {
 
   if (status === 'success') {
     return (
-      <div className="animate-fade-up text-center py-3">
-        <span className="inline-block w-4 h-px bg-brand-green mr-3 align-middle" />
-        <span className="font-sans text-sm tracking-wider text-brand-green">{message}</span>
-        <span className="inline-block w-4 h-px bg-brand-green ml-3 align-middle" />
+      <div className="animate-fade-up text-center py-4">
+        <div className="inline-flex items-center gap-3 bg-white border border-brand-border rounded-full px-6 py-3 shadow-sm">
+          <span className="w-2 h-2 rounded-full bg-brand-green shrink-0" />
+          <span className="font-sans text-sm text-brand-green font-medium tracking-wide">
+            {message}
+          </span>
+        </div>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div className="flex flex-col sm:flex-row gap-0 sm:gap-0 border-b border-brand-border focus-within:border-brand-green transition-colors duration-300">
+      <div className="flex flex-col sm:flex-row gap-2.5">
         <input
           ref={inputRef}
           type="email"
@@ -68,9 +71,11 @@ export default function EmailForm() {
           autoComplete="email"
           spellCheck={false}
           className={[
-            'flex-1 bg-transparent outline-none py-3 px-1',
+            'flex-1 bg-white border border-brand-border rounded-full',
+            'px-5 py-3 outline-none',
             'font-sans text-sm text-brand-ink placeholder:text-brand-faint',
-            'tracking-wider transition-colors duration-200',
+            'transition-colors duration-200',
+            'focus:border-brand-green focus:ring-2 focus:ring-brand-green/10',
             'disabled:opacity-50',
           ].join(' ')}
           aria-label="Email address"
@@ -80,21 +85,17 @@ export default function EmailForm() {
           type="submit"
           disabled={status === 'loading'}
           className={[
-            'mt-3 sm:mt-0 shrink-0',
+            'shrink-0 rounded-full',
             'px-7 py-3 bg-brand-green text-white',
-            'font-sans text-[10px] font-medium tracking-[0.22em] uppercase',
+            'font-display font-bold text-sm tracking-wide',
             'hover:bg-brand-green-dark transition-colors duration-200',
             'disabled:opacity-60 disabled:cursor-not-allowed',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg',
+            'focus-visible:outline-none focus-visible:ring-2',
+            'focus-visible:ring-brand-green focus-visible:ring-offset-2',
+            'focus-visible:ring-offset-brand-bg',
           ].join(' ')}
         >
-          {status === 'loading' ? (
-            <span className="inline-flex items-center gap-1.5">
-              <LoadingDots />
-            </span>
-          ) : (
-            'Notify Me'
-          )}
+          {status === 'loading' ? <LoadingDots /> : 'Notify Me'}
         </button>
       </div>
 
@@ -109,11 +110,11 @@ export default function EmailForm() {
 
 function LoadingDots() {
   return (
-    <span className="flex gap-1 items-center h-3">
+    <span className="inline-flex gap-1 items-center h-5">
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="block w-1 h-1 rounded-full bg-white animate-bounce"
+          className="block w-1.5 h-1.5 rounded-full bg-white animate-bounce"
           style={{ animationDelay: `${i * 150}ms`, animationDuration: '0.8s' }}
         />
       ))}

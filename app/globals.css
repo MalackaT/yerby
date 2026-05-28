@@ -3,37 +3,31 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
-  html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
   body {
-    background-color: #F5F3EE;
-    color: #1A1916;
+    background-color: #F7F5EF;
+    color: #0F0F0E;
     font-family: var(--font-dm-sans), system-ui, sans-serif;
   }
 }
 
 @layer utilities {
-  /* Stagger delays for cascade animation */
   .delay-100 { animation-delay: 100ms; }
-  .delay-250 { animation-delay: 250ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-550 { animation-delay: 550ms; }
-  .delay-700 { animation-delay: 700ms; }
-  .delay-900 { animation-delay: 900ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-350 { animation-delay: 350ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-650 { animation-delay: 650ms; }
+  .delay-800 { animation-delay: 800ms; }
 }
 
-/* Underline-style input — override browser defaults cleanly */
-input[type='email']:-webkit-autofill,
-input[type='email']:-webkit-autofill:hover,
-input[type='email']:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #F5F3EE inset;
-  -webkit-text-fill-color: #1A1916;
+/* Autofill override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #F7F5EF inset;
+  -webkit-text-fill-color: #0F0F0E;
   transition: background-color 5000s ease-in-out 0s;
 }

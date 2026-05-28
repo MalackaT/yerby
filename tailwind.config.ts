@@ -8,31 +8,27 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
+        display: ['var(--font-nunito)', 'system-ui', 'sans-serif'],
         sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {
-          bg: '#F5F3EE',
-          ink: '#1A1916',
-          mid: '#6E6E62',
+          bg: '#F7F5EF',
+          ink: '#0F0F0E',
+          mid: '#6A6A5E',
           muted: '#A4A498',
-          faint: '#C8C4BA',
-          green: '#3D6B4F',
-          'green-dark': '#2C5039',
-          border: '#D0CCC2',
+          faint: '#C4C0B6',
+          green: '#2A7A4A',
+          'green-dark': '#1D5C36',
+          border: '#D8D4CA',
         },
       },
-      letterSpacing: {
-        widest2: '0.25em',
-        widest3: '0.35em',
-      },
       animation: {
-        'fade-up': 'fadeUp 0.9s ease-out both',
+        'fade-up': 'fadeUp 0.8s ease-out both',
       },
       keyframes: {
         fadeUp: {
-          from: { opacity: '0', transform: 'translateY(14px)' },
+          from: { opacity: '0', transform: 'translateY(12px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
       },
