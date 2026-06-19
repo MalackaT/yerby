@@ -3,10 +3,21 @@ import EmailForm from '@/components/EmailForm';
 
 export default function Home() {
   return (
-    <main
-      className="relative min-h-screen bg-cover bg-center flex flex-col items-center justify-center overflow-hidden px-5 py-16"
-      style={{ backgroundImage: "url('/bg-leaves.jpg')" }}
-    >
+    <main className="relative min-h-screen bg-brand-green-dark flex flex-col items-center justify-center overflow-hidden px-5 py-16">
+
+      {/* Background video — plays once, freezes on last frame */}
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        muted
+        playsInline
+        poster="/bg-leaves.jpg"
+        aria-hidden="true"
+      >
+        <source src="/bg-video.mp4" type="video/mp4" />
+        <source src="/bg-video.webm" type="video/webm" />
+      </video>
 
       {/* Dark overlay for readability */}
       <div aria-hidden="true" className="absolute inset-0 bg-black/40 pointer-events-none" />
