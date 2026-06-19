@@ -5,15 +5,22 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-brand-green-dark flex flex-col items-center justify-center overflow-hidden px-5 py-16">
 
-      {/* Floating background shape */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute right-[-8%] top-1/2 -translate-y-1/2 w-[75vw] max-w-[560px] opacity-[0.06] blur-3xl animate-float">
-          <svg viewBox="0 0 88 118" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" fill="#F3C635">
-            <path d="M 42 7 C 36 3 26 5 20 13 C 14 21 16 33 22 43 C 27 51 35 57 37 67 C 39 75 35 85 31 97 C 27 107 27 117 37 119 C 47 121 55 113 59 103 C 63 93 63 81 67 69 C 71 59 77 51 77 39 C 77 29 73 17 65 11 C 57 5 49 9 47 17 C 45 23 45 33 41 39 C 37 45 29 45 25 37 C 21 29 23 15 31 9 C 35 6 39 9 42 7 Z" />
-            <path d="M 63 5 C 69 1 79 5 79 15 C 79 25 73 37 63 37 C 57 37 53 29 55 21 C 57 13 59 8 63 5 Z" />
-          </svg>
-        </div>
-      </div>
+      {/* Background video — plays once, freezes on last frame */}
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        muted
+        playsInline
+        poster="/bg-leaves.jpg"
+        aria-hidden="true"
+      >
+        <source src="/bg-video.mp4" type="video/mp4" />
+        <source src="/bg-video.webm" type="video/webm" />
+      </video>
+
+      {/* Dark overlay for readability */}
+      <div aria-hidden="true" className="absolute inset-0 bg-black/40 pointer-events-none" />
 
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center text-center w-full max-w-xl">
