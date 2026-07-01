@@ -81,7 +81,7 @@ export default function EmailForm({ dark = false }: { dark?: boolean }) {
             'flex-1 rounded-full px-5 py-3.5 outline-none font-sans text-sm',
             'transition-colors duration-200 disabled:opacity-50',
             dark
-              ? 'bg-white/5 border border-white/20 text-white placeholder:text-white/30 focus:border-white/50 focus:ring-2 focus:ring-white/10'
+              ? 'bg-brand-yellow/10 border border-brand-yellow/50 text-white placeholder:text-white/40 focus:border-brand-yellow focus:ring-2 focus:ring-brand-yellow/20'
               : 'bg-white border border-brand-border text-brand-ink placeholder:text-brand-faint focus:border-brand-green focus:ring-2 focus:ring-brand-green/10',
           ].join(' ')}
         />
