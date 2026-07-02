@@ -48,12 +48,12 @@ export default function Home() {
 
         {/* Headline */}
         <p className="font-display font-bold text-2xl sm:text-3xl text-white leading-snug mb-3 animate-fade-up delay-300">
-          Energie, co šumí.
+          Čistá mysl. Aktivní tělo.
         </p>
 
         {/* Subtext */}
-        <p className="font-sans text-sm text-white/40 tracking-wide mb-10 animate-fade-up delay-300">
-          Přírodní.&ensp;Šumivé.&ensp;Probouzející.
+        <p className="font-sans text-sm text-white/50 leading-relaxed max-w-md mb-10 animate-fade-up delay-300">
+          Zapomeňte na kompromisy a chemii. Připravujeme 100% přírodní rituál pro každého, kdo chce od svého dne víc. Ať už vás čeká náročný den v kanceláři, intenzivní trénink, nebo jen hledáte zdravý životní styl bez syntetických látek.
         </p>
 
         {/* Email form */}
