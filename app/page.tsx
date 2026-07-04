@@ -12,6 +12,7 @@ export default function Home() {
         autoPlay
         muted
         playsInline
+        preload="none"
         poster="/bg-leaves.jpg"
         aria-hidden="true"
       >
