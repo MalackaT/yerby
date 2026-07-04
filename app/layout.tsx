@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Nunito, DM_Sans } from 'next/font/google';
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 const nunito = Nunito({
   weight: ['400', '600', '700', '800', '900'],
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="cs" className={`${nunito.variable} ${dmSans.variable}`}>
-      <body>{children}</body>
+      <body>{children}<Analytics /></body>
     </html>
   );
 }
