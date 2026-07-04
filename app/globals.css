@@ -21,11 +21,11 @@
   .delay-700 { animation-delay: 700ms; }
 }
 
-/* Autofill — scoped to the dark green form zone */
+/* Autofill — input is white, keep it white with dark text */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #1C3D2A inset;
-  -webkit-text-fill-color: rgba(255,255,255,0.9);
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  -webkit-text-fill-color: #0F0F0E;
   transition: background-color 5000s ease-in-out 0s;
 }
