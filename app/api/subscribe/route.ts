@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addSubscriber } from '@/lib/resend';
+import { addSubscriber, sendWelcomeEmail } from '@/lib/resend';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,6 +33,12 @@ export async function POST(req: NextRequest) {
 
     if (!result.success) {
       return NextResponse.json({ error: result.error }, { status: 500 });
+    }
+
+    try {
+      await sendWelcomeEmail(normalized);
+    } catch (mailErr) {
+      console.error('[subscribe] welcome email failed:', mailErr);
     }
 
     return NextResponse.json({

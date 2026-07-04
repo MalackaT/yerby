@@ -29,3 +29,12 @@ export async function addSubscriber(email: string): Promise<SubscribeResult> {
 
   return { success: true };
 }
+
+export async function sendWelcomeEmail(email: string): Promise<void> {
+  await getClient().emails.send({
+    from: 'Yerby <ahoj@drinkyerby.com>',
+    to: email,
+    subject: 'Jsi na seznamu',
+    html: '<div style="font-family: sans-serif; padding: 24px; color: #2d3a2e;"><h1>Vitej u Yerby.</h1><p>Jsi na seznamu. Brzy se ozveme.</p><p><strong>Ne nakopnuti. Rovnovaha.</strong></p></div>',
+  });
+}
