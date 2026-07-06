@@ -34,64 +34,36 @@ export async function sendWelcomeEmail(email: string): Promise<void> {
   await getClient().emails.send({
     from: 'Yerby <ahoj@drinkyerby.com>',
     to: email,
-    subject: 'Tak jo, jsi in 🌿',
+    subject: 'Jsi na seznamu 🌿',
     html: `
   <div style="margin:0;padding:0;background-color:#f7f7f5;">
-    <div style="max-width:520px;margin:0 auto;padding:40px 24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+    <div style="max-width:520px;margin:0 auto;padding:48px 24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
 
       <!-- Logo hlavička -->
-      <div style="text-align:center;padding-bottom:32px;">
-        <img src="https://drinkyerby.com/logo-wordmark.png" alt="Yerby" width="120" style="display:inline-block;height:auto;" />
+      <div style="text-align:center;padding-bottom:36px;">
+        <img src="https://drinkyerby.com/logo-wordmark.png" alt="Yerby" width="220" style="display:inline-block;height:auto;max-width:80%;" />
       </div>
 
       <!-- Hlavní karta -->
-      <div style="background-color:#ffffff;border-radius:20px;padding:40px 32px;">
+      <div style="background-color:#ffffff;border-radius:20px;padding:40px 32px;text-align:center;">
 
-        <h1 style="font-size:26px;font-weight:800;color:#2d3a2e;margin:0 0 20px;line-height:1.2;">
-          Tak jo, jsi in. 🌿
+        <h1 style="font-size:26px;font-weight:800;color:#2d3a2e;margin:0 0 16px;line-height:1.2;">
+          Jsi na seznamu. 🌿
         </h1>
 
-        <p style="font-size:16px;line-height:1.65;color:#3d4a3e;margin:0 0 18px;">
-          Právě sis zajistil místo mezi prvními. Až spustíme, budeš u toho dřív než ostatní — a rovnou se slevou.
-        </p>
-
-        <p style="font-size:16px;line-height:1.65;color:#3d4a3e;margin:0 0 18px;">
-          Chystáme 100% přírodní nápoj pro každého, kdo chce od svého dne trochu víc. Základ? Prvotřídní <strong>cold brew yerba maté</strong>, přirozeně nabité minerály a antioxidanty. Žádná chemie, žádný cukr, žádnej crash — jen čistá energie, co tě naladí a udrží v tempu.
-        </p>
-
         <p style="font-size:16px;line-height:1.65;color:#3d4a3e;margin:0 0 28px;">
-          Ať už tě čeká náročnej den v práci nebo aktivní odpoledne, Yerby jede s tebou ve tvým rytmu.
-        </p>
-
-        <!-- Tagline -->
-        <div style="background-color:#f2f5ee;border-radius:14px;padding:20px 24px;text-align:center;margin:0 0 28px;">
-          <p style="font-size:18px;font-weight:800;color:#598042;margin:0;letter-spacing:-0.3px;">
-            Ne nakopnutí. Rovnováha.
-          </p>
-        </div>
-
-        <!-- Co bude dál -->
-        <p style="font-size:15px;line-height:1.65;color:#3d4a3e;margin:0 0 8px;">
-          <strong>Co bude dál?</strong>
-        </p>
-        <p style="font-size:15px;line-height:1.65;color:#3d4a3e;margin:0 0 28px;">
-          Pár dní před spuštěním ti pošleme mail, že se jde do prodeje — a s ním <strong>tvůj slevový kód</strong> pro první nákup. Tak koukej na schránku. 👀
+          Jakmile budeme launchovat, ozveme se ti jako prvnímu — i s tvým slevovým kódem na první nákup.
         </p>
 
         <!-- Instagram CTA -->
-        <div style="text-align:center;margin:0 0 8px;">
-          <a href="https://www.instagram.com/yerbycz/" style="display:inline-block;background-color:#598042;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:14px 32px;border-radius:999px;">
-            Sleduj nás na Instagramu →
-          </a>
-        </div>
+        <a href="https://www.instagram.com/yerbycz/" style="display:inline-block;background-color:#598042;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:14px 32px;border-radius:999px;">
+          Sleduj nás na Instagramu →
+        </a>
 
       </div>
 
       <!-- Patička -->
       <div style="text-align:center;padding:28px 24px 0;">
-        <p style="font-size:13px;line-height:1.6;color:#9aa39b;margin:0 0 4px;">
-          Dostáváš tento e-mail, protože ses přihlásil na čekací listinu Yerby.
-        </p>
         <p style="font-size:13px;line-height:1.6;color:#9aa39b;margin:0;">
           — tým Yerby 🌿
         </p>
