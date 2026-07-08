@@ -61,7 +61,7 @@ export default function Home() {
 
         {/* Email form + captions (below logo on mobile via order, below text on desktop) */}
         <div className="max-md:order-3 w-full flex flex-col items-center animate-fade-up delay-400">
-          <div className="h-5 mb-3 flex items-center justify-center">
+          <div className="min-h-5 mb-3 flex items-center justify-center">
             <WaitlistCounter />
           </div>
           <p className="mb-4 font-sans text-sm sm:text-base font-semibold text-white">

@@ -34,8 +34,8 @@ export default function WaitlistCounter() {
   if (slotsLeft === null) return null;
 
   return (
-    <p className="font-sans text-[11px] font-semibold tracking-[0.24em] uppercase text-brand-yellow">
-      Zbývá {slotsLeft} ze {TOTAL_SLOTS} launch slev
+    <p className="font-sans text-[13px] sm:text-sm font-semibold text-brand-yellow">
+      20% sleva už jen pro posledních {slotsLeft} z vás
     </p>
   );
 }
