@@ -23,15 +23,39 @@ export async function getSubscriberCount(): Promise<number | null> {
   }
 
   try {
-    const { data, error } = await getClient().contacts.list({
-      audienceId: process.env.RESEND_AUDIENCE_ID,
-    });
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+    // contacts.list returns at most 100 per page (default is only 20), so a
+    // single call would plateau the counter well before every email is counted.
+    // Page through the whole audience, deduping by id so a repeated/stuck
+    // cursor can never overcount.
+    const ids = new Set<string>();
+    let after: string | undefined;
 
-    if (error || !data || !Array.isArray(data.data)) {
-      return null;
+    for (let page = 0; page < 200; page++) {
+      const { data, error } = await getClient().contacts.list({
+        audienceId,
+        limit: 100,
+        ...(after ? { after } : {}),
+      });
+
+      if (error || !data || !Array.isArray(data.data)) {
+        // First page failed → unknown; a later page failed → keep what we have.
+        return page === 0 ? null : ids.size;
+      }
+
+      const seenBefore = ids.size;
+      for (const contact of data.data) ids.add(contact.id);
+
+      // Stop when the API says there's no more, the page was empty, or the
+      // cursor stopped yielding new ids (guards against an infinite loop).
+      if (!data.has_more || data.data.length === 0 || ids.size === seenBefore) {
+        break;
+      }
+
+      after = data.data[data.data.length - 1].id;
     }
 
-    return data.data.length;
+    return ids.size;
   } catch {
     return null;
   }
