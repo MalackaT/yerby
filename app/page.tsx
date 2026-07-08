@@ -64,13 +64,13 @@ export default function Home() {
           <div className="h-5 mb-3 flex items-center justify-center">
             <WaitlistCounter />
           </div>
+          <p className="mb-4 font-sans text-sm sm:text-base font-semibold text-white">
+            Zadej e-mail a získej <span className="text-brand-yellow">20% slevu</span> na první objednávku.
+          </p>
           <div className="w-full">
             <EmailForm dark />
           </div>
-          <p className="mt-4 font-sans text-[10px] tracking-[0.22em] uppercase leading-relaxed max-w-sm text-white/40">
-            Registrací se přihlásíš na waitlist a při spuštění získáš slevu na první objednávku.
-          </p>
-          <p className="mt-2 font-sans text-[10px] tracking-[0.22em] uppercase text-white/20">
+          <p className="mt-3 font-sans text-[10px] tracking-[0.22em] uppercase text-white/20">
             Žádný spam — jen info o spuštění.
           </p>
         </div>
