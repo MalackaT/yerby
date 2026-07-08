@@ -29,6 +29,8 @@ export default function EmailForm({ dark = false }: { dark?: boolean }) {
         setStatus('success');
         setMessage(data.message ?? 'Jsi na seznamu. Sleduj nás!');
         setEmail('');
+        // Let the waitlist counter tick down immediately on a real signup.
+        window.dispatchEvent(new CustomEvent('yerby:signup'));
       } else {
         setStatus('error');
         setMessage(data.error ?? 'Něco se pokazilo. Zkuste to prosím znovu.');

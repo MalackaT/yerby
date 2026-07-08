@@ -12,10 +12,11 @@ const TOTAL_SLOTS = 100;
 export default function WaitlistCounter() {
   const [slotsLeft, setSlotsLeft] = useState<number | null>(null);
 
+  // Load the real count once on mount (source of truth).
   useEffect(() => {
     let alive = true;
 
-    fetch('/api/waitlist-count')
+    fetch('/api/waitlist-count', { cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : null))
       .then((data: { count: number | null } | null) => {
         if (alive && data && typeof data.count === 'number') {
@@ -29,6 +30,17 @@ export default function WaitlistCounter() {
     return () => {
       alive = false;
     };
+  }, []);
+
+  // Tick down instantly when someone signs up in this session. Honest —
+  // it only moves on a real successful submit; a reload reconciles it
+  // with the true server count.
+  useEffect(() => {
+    function onSignup() {
+      setSlotsLeft((prev) => (prev === null ? prev : Math.max(0, prev - 1)));
+    }
+    window.addEventListener('yerby:signup', onSignup);
+    return () => window.removeEventListener('yerby:signup', onSignup);
   }, []);
 
   if (slotsLeft === null) return null;
