@@ -12,6 +12,31 @@ export type SubscribeResult =
   | { success: true }
   | { success: false; error: string };
 
+/**
+ * Real signup count from the Resend audience.
+ * Returns null when env vars are missing or the API call fails —
+ * callers hide the counter in that case.
+ */
+export async function getSubscriberCount(): Promise<number | null> {
+  if (!process.env.RESEND_API_KEY || !process.env.RESEND_AUDIENCE_ID) {
+    return null;
+  }
+
+  try {
+    const { data, error } = await getClient().contacts.list({
+      audienceId: process.env.RESEND_AUDIENCE_ID,
+    });
+
+    if (error || !data || !Array.isArray(data.data)) {
+      return null;
+    }
+
+    return data.data.length;
+  } catch {
+    return null;
+  }
+}
+
 export async function addSubscriber(email: string): Promise<SubscribeResult> {
   if (!process.env.RESEND_API_KEY || !process.env.RESEND_AUDIENCE_ID) {
     throw new Error('RESEND_API_KEY and RESEND_AUDIENCE_ID must be set in .env.local');
