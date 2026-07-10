@@ -12,6 +12,45 @@ export type SubscribeResult =
   | { success: true; alreadyExists: boolean }
   | { success: false; error: string };
 
+type ContactPage = {
+  object: 'list';
+  data: Array<{ id: string }>;
+  has_more?: boolean;
+};
+
+/**
+ * One page of audience contacts. Reads the legacy /audiences endpoint FIRST —
+ * the same resource new signups are written to via contacts.create — so a
+ * fresh contact is immediately visible to the counter. (The SDK's
+ * contacts.list maps audienceId onto the newer /segments endpoint, which can
+ * lag or diverge from the audience; it's kept only as a fallback.)
+ */
+async function listContactPage(
+  audienceId: string,
+  after?: string,
+): Promise<ContactPage | null> {
+  const client = getClient();
+  const qs = `limit=100${after ? `&after=${encodeURIComponent(after)}` : ''}`;
+
+  const legacy = await client.get<ContactPage>(
+    `/audiences/${audienceId}/contacts?${qs}`,
+  );
+  if (!legacy.error && legacy.data && Array.isArray(legacy.data.data)) {
+    return legacy.data;
+  }
+
+  const seg = await client.contacts.list({
+    audienceId,
+    limit: 100,
+    ...(after ? { after } : {}),
+  });
+  if (!seg.error && seg.data && Array.isArray(seg.data.data)) {
+    return seg.data;
+  }
+
+  return null;
+}
+
 /**
  * Real signup count from the Resend audience.
  * Returns null when env vars are missing or the API call fails —
@@ -24,21 +63,16 @@ export async function getSubscriberCount(): Promise<number | null> {
 
   try {
     const audienceId = process.env.RESEND_AUDIENCE_ID;
-    // contacts.list returns at most 100 per page (default is only 20), so a
-    // single call would plateau the counter well before every email is counted.
-    // Page through the whole audience, deduping by id so a repeated/stuck
-    // cursor can never overcount.
+    // Pages default to only 20 items, so a single call would plateau the
+    // counter well before every email is counted. Page through the whole
+    // audience, deduping by id so a repeated/stuck cursor can never overcount.
     const ids = new Set<string>();
     let after: string | undefined;
 
     for (let page = 0; page < 200; page++) {
-      const { data, error } = await getClient().contacts.list({
-        audienceId,
-        limit: 100,
-        ...(after ? { after } : {}),
-      });
+      const data = await listContactPage(audienceId, after);
 
-      if (error || !data || !Array.isArray(data.data)) {
+      if (!data) {
         // First page failed → unknown; a later page failed → keep what we have.
         return page === 0 ? null : ids.size;
       }
