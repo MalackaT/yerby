@@ -35,15 +35,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: result.error }, { status: 500 });
     }
 
-    try {
-      await sendWelcomeEmail(normalized);
-    } catch (mailErr) {
-      console.error('[subscribe] welcome email failed:', mailErr);
+    // Only email — and only count — brand-new subscribers.
+    if (!result.alreadyExists) {
+      try {
+        await sendWelcomeEmail(normalized);
+      } catch (mailErr) {
+        console.error('[subscribe] welcome email failed:', mailErr);
+      }
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Jsi na seznamu. Sleduj nás!',
+      alreadyExists: result.alreadyExists,
+      message: result.alreadyExists
+        ? 'Na seznamu už jsi. Díky! 🌿'
+        : 'Jsi na seznamu. Sleduj nás!',
     });
   } catch (err) {
     console.error('[subscribe] error:', err);

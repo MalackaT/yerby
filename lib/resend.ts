@@ -9,7 +9,7 @@ function getClient() {
 }
 
 export type SubscribeResult =
-  | { success: true }
+  | { success: true; alreadyExists: boolean }
   | { success: false; error: string };
 
 /**
@@ -66,17 +66,36 @@ export async function addSubscriber(email: string): Promise<SubscribeResult> {
     throw new Error('RESEND_API_KEY and RESEND_AUDIENCE_ID must be set in .env.local');
   }
 
+  const audienceId = process.env.RESEND_AUDIENCE_ID;
+
+  // Reliable duplicate check: if this email is already a contact, it's an
+  // idempotent no-op — don't re-create, re-email, or tick the counter.
+  // Any lookup failure falls through to create (safe: Resend upserts by email).
+  try {
+    const existing = await getClient().contacts.get({ audienceId, email });
+    if (existing.data?.id) {
+      return { success: true, alreadyExists: true };
+    }
+  } catch {
+    /* fall through to create */
+  }
+
   const { error } = await getClient().contacts.create({
     email,
-    audienceId: process.env.RESEND_AUDIENCE_ID,
+    audienceId,
     unsubscribed: false,
   });
 
   if (error) {
+    // Fallback: some Resend API versions surface an existing email as an error
+    // instead of returning it — still treat "already exists" as a signup.
+    if (/already\s*exist|duplicate/i.test(error.message)) {
+      return { success: true, alreadyExists: true };
+    }
     return { success: false, error: error.message };
   }
 
-  return { success: true };
+  return { success: true, alreadyExists: false };
 }
 
 export async function sendWelcomeEmail(email: string): Promise<void> {

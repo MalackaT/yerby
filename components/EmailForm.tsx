@@ -23,14 +23,18 @@ export default function EmailForm({ dark = false }: { dark?: boolean }) {
         body: JSON.stringify({ email: email.trim() }),
       });
 
-      const data: { message?: string; error?: string } = await res.json();
+      const data: { message?: string; error?: string; alreadyExists?: boolean } =
+        await res.json();
 
       if (res.ok) {
         setStatus('success');
         setMessage(data.message ?? 'Jsi na seznamu. Sleduj nás!');
         setEmail('');
-        // Let the waitlist counter tick down immediately on a real signup.
-        window.dispatchEvent(new CustomEvent('yerby:signup'));
+        // Tick the counter down only for a genuinely new signup, so a repeat
+        // submit of the same email doesn't wrongly decrement it.
+        if (!data.alreadyExists) {
+          window.dispatchEvent(new CustomEvent('yerby:signup'));
+        }
       } else {
         setStatus('error');
         setMessage(data.error ?? 'Něco se pokazilo. Zkuste to prosím znovu.');
